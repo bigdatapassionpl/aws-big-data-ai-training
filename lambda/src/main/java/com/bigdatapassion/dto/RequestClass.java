@@ -1,4 +1,4 @@
-package com.bigdatapassion;
+package com.bigdatapassion.dto;
 
 public class RequestClass {
 
