@@ -8,3 +8,4 @@ def get_my_log_stream(event, context):
     # Code will execute quickly, so we add a 1 second intentional delay so you can see that in time remaining value.
     time.sleep(1)
     print("Time remaining (MS):", context.get_remaining_time_in_millis())
+    return event
