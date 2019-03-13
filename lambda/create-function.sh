@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mvn clean install
+
 aws lambda create-function \
     --function-name lambda-function-in-java \
     --runtime java8 \
@@ -8,3 +10,6 @@ aws lambda create-function \
     --timeout 15 \
     --memory-size 512 \
     --zip-file fileb://target/lambda-1.0-SNAPSHOT.jar
+
+echo -e "\nFunctions:"
+aws lambda list-functions
