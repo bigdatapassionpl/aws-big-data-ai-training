@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-cd src/main/python
-zip -r function.zip  lambda
+cd src/main/python/function
+zip -r function.zip  *
 
 aws lambda create-function \
     --function-name lambda-function-in-python \
@@ -11,6 +11,8 @@ aws lambda create-function \
     --timeout 15 \
     --memory-size 512 \
     --zip-file fileb://function.zip
+
+rm -rf function.zip
 
 echo -e "\nFunctions:"
 aws lambda list-functions
