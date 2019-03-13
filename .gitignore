@@ -1,0 +1,24 @@
+# Repositories
+.git
+.hg
+.svn
+.hgsvn
+
+# JetBrains
+*.iml
+*.ipr
+*.iws
+.idea
+
+# JDK & Maven
+target/
+target
+classes
+bin
+WEB-INF/classes
+WEB-INF/lib
+build
+
+# Eclipse
+.settings
+.project
