@@ -54,6 +54,13 @@
     <dependencyManagement>
         <dependencies>
 
+            <!--AWS DynamoDB-->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-dynamodb</artifactId>
+                <version>1.11.517</version>
+            </dependency>
+
             <!--AWS Lambda-->
             <dependency>
                 <groupId>com.amazonaws</groupId>

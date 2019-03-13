@@ -15,9 +15,16 @@
 
     <dependencies>
 
+        <!--AWS Lambda-->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-core</artifactId>
+        </dependency>
+
+        <!--AWS DynamoDB-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
         </dependency>
 
     </dependencies>
