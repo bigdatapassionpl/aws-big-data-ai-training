@@ -9,11 +9,24 @@ import java.io.OutputStream;
 
 public class StreamLambda implements RequestStreamHandler {
 
-    public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+
         int letter;
-        while ((letter = input.read()) != -1) {
-            output.write(Character.toUpperCase(letter));
+        try {
+            while ((letter = inputStream.read()) != -1) {
+                outputStream.write(Character.toUpperCase(letter));
+            }
+            Thread.sleep(3000); // Intentional delay for testing the getRemainingTimeInMillis() result.
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        // Print info from the context object
+        context.getLogger().log("Function name: " + context.getFunctionName());
+        context.getLogger().log("Max mem allocated: " + context.getMemoryLimitInMB());
+        context.getLogger().log("Time remaining in milliseconds: " + context.getRemainingTimeInMillis());
+        context.getLogger().log("CloudWatch log stream name: " + context.getLogStreamName());
+        context.getLogger().log("CloudWatch log group name: " + context.getLogGroupName());
     }
 
 }
