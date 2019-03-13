@@ -16,6 +16,9 @@
 
     <properties>
 
+        <!--AWS-->
+        <sagemaker-spark.version>spark_2.2.0-1.2.1</sagemaker-spark.version>
+
         <!-- AWS EMR 5.20.0-->
         <hadoop.version>[2.8.5]</hadoop.version>
         <spark.version>[2.4.0]</spark.version>
@@ -23,7 +26,7 @@
         <hbase.version>[1.4.8]</hbase.version>
 
         <!--Other-->
-        <jackson.version>2.6.5</jackson.version>
+        <jackson.version>2.9.8</jackson.version>
 
         <!-- Java 8 -->
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -61,7 +64,7 @@
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>sagemaker-spark_2.11</artifactId>
-                <version>spark_2.2.0-1.0</version>
+                <version>${sagemaker-spark.version}</version>
             </dependency>
 
             <!--Apache Hadoop-->
