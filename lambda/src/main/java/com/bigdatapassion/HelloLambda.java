@@ -9,6 +9,9 @@ public class HelloLambda implements RequestHandler<RequestClass, ResponseClass> 
 
     public ResponseClass handleRequest(RequestClass request, Context context) {
         String greetingString = String.format("Hello %s, %s.", request.getFirstName(), request.getLastName());
+
+        context.getLogger().log(greetingString);
+
         return new ResponseClass(greetingString);
     }
 
