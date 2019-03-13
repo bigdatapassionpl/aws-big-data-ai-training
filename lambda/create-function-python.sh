@@ -7,7 +7,7 @@ aws lambda create-function \
     --function-name lambda-function-in-python \
     --runtime python3.6 \
     --role arn:aws:iam::252594130684:role/Politechnika  \
-    --handler context-lambda.get_my_log_stream \
+    --handler hello-lambda.my_handler \
     --timeout 15 \
     --memory-size 512 \
     --zip-file fileb://function.zip
