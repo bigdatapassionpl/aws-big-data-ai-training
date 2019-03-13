@@ -8,7 +8,7 @@ public class SimpleLambda implements RequestHandler<String, String> {
     @Override
     public String handleRequest(String input, Context context) {
         context.getLogger().log("Input: " + input);
-        return String.valueOf(input);
+        return "Your input was: " + input;
     }
 
 }
