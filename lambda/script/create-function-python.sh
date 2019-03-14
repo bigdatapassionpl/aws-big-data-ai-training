@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd src/main/python/function
+cd ../src/main/python/function
 zip -r function.zip  *
 
 aws lambda create-function \
