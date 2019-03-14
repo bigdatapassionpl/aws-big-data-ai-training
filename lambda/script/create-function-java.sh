@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+cd ..
 mvn clean install
 
 aws lambda create-function \
