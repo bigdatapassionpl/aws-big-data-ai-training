@@ -40,6 +40,3 @@ aws lambda create-function \
     --zip-file fileb://function.zip
 
 rm -rf function.zip
-
-echo -e "\nFunctions:"
-aws lambda list-functions
