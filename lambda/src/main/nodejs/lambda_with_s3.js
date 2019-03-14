@@ -4,8 +4,8 @@ var s3 = new AWS.S3();
 exports.handler = function (event, context, callback) {
 
     // S3 params (bucket and object key)
-    var src_bkt = 'bucket';
-    var src_key = 'file.txt';
+    var src_bkt = 'aws-educate-radek-test';
+    var src_key = 'test.txt';
 
     // Get the object
     s3.getObject({
