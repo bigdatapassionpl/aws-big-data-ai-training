@@ -30,6 +30,15 @@ aws lambda create-function \
     --memory-size 512 \
     --zip-file fileb://function.zip
 
+aws lambda create-function \
+    --function-name lambda-function-in-python-sns-fetch \
+    --runtime python2.7 \
+    --role arn:aws:iam::252594130684:role/Politechnika  \
+    --handler sns-fetch-lambda.lambda_handler \
+    --timeout 15 \
+    --memory-size 512 \
+    --zip-file fileb://function.zip
+
 rm -rf function.zip
 
 echo -e "\nFunctions:"

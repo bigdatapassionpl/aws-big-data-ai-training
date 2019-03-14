@@ -9,5 +9,8 @@ aws lambda delete-function \
 aws lambda delete-function \
     --function-name lambda-function-in-python-context
 
+aws lambda delete-function \
+    --function-name lambda-function-in-python-sns-fetch
+
 echo -e "\nFunctions:"
 aws lambda list-functions
