@@ -23,6 +23,14 @@ from pyspark.sql.types import StringType
 
 glueContext = GlueContext(SparkContext.getOrCreate())
 
+# Show data only by Spark
+medicare = spark.read.format(
+    "com.databricks.spark.csv").option(
+    "header", "true").option(
+    "inferSchema", "true").load(
+    's3://awsglue-datasets/examples/medicare/Medicare_Hospital_Provider.csv')
+medicare.printSchema()
+
 # Data Catalog: database and table name
 db_name = "payments"
 tbl_name = "medicare"
