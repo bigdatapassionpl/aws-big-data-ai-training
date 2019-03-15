@@ -13,6 +13,7 @@
     <modules>
         <module>sagemaker-spark</module>
         <module>lambda</module>
+        <module>glue</module>
     </modules>
 
     <properties>
@@ -78,6 +79,18 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-s3</artifactId>
                 <version>1.11.517</version>
+            </dependency>
+
+            <!-- AWS Glue -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-glue</artifactId>
+                <version>1.11.517</version>
+            </dependency>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-glue-assembly</artifactId>
+                <version>1.0.0</version>
             </dependency>
 
             <!--Hadoop on AWS-->
