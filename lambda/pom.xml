@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>lambda</artifactId>
-    <name>Lambda</name>
+    <name>AWS Lambda</name>
 
     <parent>
         <artifactId>aws-big-data-ai-training</artifactId>

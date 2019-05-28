@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sagemaker-spark</artifactId>
-    <name>SageMaker - Apache Spark</name>
+    <name>AWS SageMaker - Apache Spark</name>
 
     <parent>
         <artifactId>aws-big-data-ai-training</artifactId>

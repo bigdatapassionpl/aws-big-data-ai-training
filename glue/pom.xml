@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>glue</artifactId>
-    <name>Glue</name>
+    <name>AWS Glue</name>
 
     <parent>
         <artifactId>aws-big-data-ai-training</artifactId>
