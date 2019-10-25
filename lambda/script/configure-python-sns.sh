@@ -3,7 +3,7 @@
 
 # Add Lambda to SNS as subscription
 aws sns subscribe \
-    --topic-arn arn:aws:sns:us-east-1:252594130684:testSNS \
+    --topic-arn arn:aws:sns:us-east-1:020214251602:PolitechnikaSnsTopic \
     --protocol lambda \
     --notification-endpoint arn:aws:lambda:us-east-1:252594130684:function:lambda-function-in-python-sns-fetch
 
@@ -13,10 +13,10 @@ aws lambda add-permission \
     --statement-id 276xxxxxx\
     --action "lambda:InvokeFunction" \
     --principal sns.amazonaws.com \
-    --source-arn arn:aws:sns:us-east-1:252594130684:testSNS
+    --source-arn arn:aws:sns:us-east-1:020214251602:PolitechnikaSnsTopic
 
 # Send message to publish and trigger lamda
 aws sns publish \
-    --topic-arn arn:aws:sns:us-east-1:252594130684:testSNS \
+    --topic-arn arn:aws:sns:us-east-1:020214251602:PolitechnikaSnsTopic \
     --subject "HelloFromSNSTopicAndLambda" \
     --message "Testowa wiadomość z konsoli do AWS SNS"
