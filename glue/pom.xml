@@ -22,8 +22,13 @@
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-glue-assembly</artifactId>
+            <artifactId>AWSGlueETL</artifactId>
+            <version>1.0.0</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-java-glue-assembly</artifactId>-->
+<!--        </dependency>-->
 
         <!--Apache Spark-->
         <dependency>

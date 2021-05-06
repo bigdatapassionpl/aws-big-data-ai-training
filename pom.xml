@@ -19,6 +19,7 @@
         <module>sagemaker-spark</module>
         <module>lambda</module>
         <module>glue</module>
+        <module>kinesis</module>
     </modules>
 
     <properties>
@@ -69,11 +70,11 @@
                 <artifactId>aws-java-sdk-glue</artifactId>
                 <version>1.11.517</version>
             </dependency>
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-glue-assembly</artifactId>
-                <version>1.0.0</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.amazonaws</groupId>-->
+<!--                <artifactId>aws-java-glue-assembly</artifactId>-->
+<!--                <version>1.0.0</version>-->
+<!--            </dependency>-->
 
             <!--Hadoop on AWS-->
             <dependency>
@@ -147,6 +148,13 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>aws-glue-etl-artifacts</id>
+            <url>https://aws-glue-etl-artifacts.s3.amazonaws.com/release/</url>
+        </repository>
+    </repositories>
 
     <build>
 
