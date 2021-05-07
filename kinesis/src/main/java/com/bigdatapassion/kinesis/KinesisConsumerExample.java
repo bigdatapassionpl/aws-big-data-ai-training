@@ -1,6 +1,5 @@
 package com.bigdatapassion.kinesis;
 
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.*;
 
@@ -9,16 +8,17 @@ import java.util.List;
 
 public class KinesisConsumerExample {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
 
-        Region region = Region.US_EAST_1;
+        KinesisConfiguration kinesisConfiguration = new KinesisConfiguration();
+        kinesisConfiguration.load();
+
         KinesisClient kinesisClient = KinesisClient.builder()
-//                .credentialsProvider()
-                .region(region)
+                .region(kinesisConfiguration.getRegion())
                 .build();
 
         DescribeStreamRequest describeRequest = DescribeStreamRequest.builder()
-                .streamName("pw-test-1o89824")
+                .streamName(kinesisConfiguration.getStreamName())
                 .build();
 
         DescribeStreamResponse describeResponse = kinesisClient.describeStream(describeRequest);
@@ -27,7 +27,7 @@ public class KinesisConsumerExample {
         // https://docs.aws.amazon.com/kinesis/latest/APIReference/API_StartingPosition.html
         Shard shard = shards.get(0);
         GetShardIteratorRequest iteratorRequest = GetShardIteratorRequest.builder()
-                .streamName("pw-test-1o89824")
+                .streamName(kinesisConfiguration.getStreamName())
                 .shardId(shard.shardId())
                 .shardIteratorType(ShardIteratorType.TRIM_HORIZON)
                 .build();
