@@ -19,10 +19,10 @@ public class MessageFactory {
         person.setName(faker.name().fullName());
         person.setPhoneNumber(faker.phoneNumber().phoneNumber());
 
-        person.setCity(faker.address().city());
         person.setCountry(faker.address().country());
-        person.setNumber(faker.address().buildingNumber());
+        person.setCity(faker.address().city());
         person.setStreetName(faker.address().streetName());
+        person.setNumber(faker.address().buildingNumber());
 
         person.setAnimal(faker.animal().name());
 
