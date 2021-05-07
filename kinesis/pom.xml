@@ -5,6 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>kinesis</artifactId>
+    <name>AWS Kinesis</name>
 
     <parent>
         <artifactId>aws-big-data-ai-training</artifactId>
