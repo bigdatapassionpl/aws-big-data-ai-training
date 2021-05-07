@@ -1,5 +1,6 @@
 package com.bigdatapassion.kinesis;
 
+import com.google.gson.Gson;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.PutRecordRequest;
@@ -7,17 +8,16 @@ import software.amazon.awssdk.services.kinesis.model.PutRecordResponse;
 
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class KinesisProducerExample {
 
     public static void main(String[] args) throws InterruptedException {
 
+        Gson gson = new Gson();
+        MessageFactory personFactory = new MessageFactory();
+
         KinesisConfiguration kinesisConfiguration = new KinesisConfiguration();
         kinesisConfiguration.load();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         KinesisClient kinesisClient = KinesisClient.builder()
                 .region(kinesisConfiguration.getRegion())
@@ -25,19 +25,18 @@ public class KinesisProducerExample {
 
         for (int j = 0; j < 1000; j++) {
 
-            String partitionKey = String.format("partitionKey-%d", j);
-            String currentDate = LocalDateTime.now().format(formatter);
-            String message = "To jest testowa wiadomość o kluczu: " + partitionKey + "z dnia " + currentDate;
+            Message message = personFactory.generateNextMessage(j);
+            String jsonMessage = gson.toJson(message);
 
             PutRecordRequest kinesisRecord = PutRecordRequest.builder()
                     .streamName(kinesisConfiguration.getStreamName())
-                    .data(SdkBytes.fromString(message, StandardCharsets.UTF_8))
-                    .partitionKey(partitionKey)
+                    .data(SdkBytes.fromString(jsonMessage, StandardCharsets.UTF_8))
+                    .partitionKey(message.getPartitionKey())
                     .build();
 
             PutRecordResponse putRecordResponse = kinesisClient.putRecord(kinesisRecord);
 
-            System.out.println(MessageFormat.format("Wysłano wiadomość do shard {0} o treści: {1}", putRecordResponse.shardId(), message));
+            System.out.println(MessageFormat.format("Wysłano wiadomość do shard {0} o treści: {1}", putRecordResponse.shardId(), jsonMessage));
 
             Thread.sleep(1000);
         }
