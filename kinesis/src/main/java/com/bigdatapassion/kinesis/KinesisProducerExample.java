@@ -38,7 +38,7 @@ public class KinesisProducerExample {
 
             System.out.println(MessageFormat.format("Wysłano wiadomość do shard {0} o treści: {1}", putRecordResponse.shardId(), jsonMessage));
 
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }
     }
 
