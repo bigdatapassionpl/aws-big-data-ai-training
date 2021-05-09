@@ -1,6 +1,7 @@
 package com.bigdatapassion.kinesis;
 
 import com.google.gson.Gson;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.PutRecordRequest;
@@ -19,7 +20,10 @@ public class KinesisProducerExample {
         KinesisConfiguration kinesisConfiguration = new KinesisConfiguration();
         kinesisConfiguration.load();
 
+        AwsCredentialsProvider credentialsProvider = kinesisConfiguration.createCredentialsProvider();
+
         KinesisClient kinesisClient = KinesisClient.builder()
+                .credentialsProvider(credentialsProvider)
                 .region(kinesisConfiguration.getRegion())
                 .build();
 
