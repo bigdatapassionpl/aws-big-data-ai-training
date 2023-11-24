@@ -1,7 +1,7 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
-const  { AWS } = require ( "@aws-sdk/client-s3" );
+const AWS = require('aws-sdk');
 
 export const handler = async (event, context) => {
     // Set up the S3 client
