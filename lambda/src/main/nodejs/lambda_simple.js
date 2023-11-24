@@ -1,6 +1,14 @@
-exports.handler = function (event, context, callback) {
+export const handler = async (event) => {
+    // Generuj losową liczbę z zakresu 1 do 100
+    const randomNum = Math.floor(Math.random() * 100) + 1;
 
-    var generatednumber = Math.floor(Math.random() * 10)
+    // Przygotuj odpowiedź
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify({
+            randomNumber: randomNum
+        }),
+    };
 
-    callback(null, generatednumber);
+    return response;
 };
