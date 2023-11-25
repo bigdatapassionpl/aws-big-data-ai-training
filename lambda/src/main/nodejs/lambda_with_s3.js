@@ -1,14 +1,13 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+
 
 const AWS = require('aws-sdk');
 
-export const handler = async (event, context) => {
+exports.handler = async (event, context) => {
     // Set up the S3 client
     const s3 = new AWS.S3();
 
     // Specify the bucket and file key
-    const bucketName = 'sdgagqwagqwae';
+    const bucketName = 'radek-politechnika-2023-11-25';
     const fileKey = 'test.txt';
 
     try {
