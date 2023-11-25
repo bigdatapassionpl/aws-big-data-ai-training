@@ -1,4 +1,4 @@
-export const handler = async (event) => {
+exports.handler = async (event) => {
     // Generuj losową liczbę z zakresu 1 do 100
     const randomNum = Math.floor(Math.random() * 100) + 1;
 
