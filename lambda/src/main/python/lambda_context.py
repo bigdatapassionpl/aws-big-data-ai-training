@@ -1,6 +1,6 @@
 import time
 
-def get_my_log_stream(event, context):
+def lambda_handler(event, context):
     print("Log stream name:", context.log_stream_name)
     print("Log group name:",  context.log_group_name)
     print("Request ID:",context.aws_request_id)

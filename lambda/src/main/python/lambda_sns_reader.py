@@ -1,12 +1,15 @@
-from __future__ import print_function
-
 import json
 
-print('Loading function')
-
-
 def lambda_handler(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
-    message = event['Records'][0]['Sns']['Message']
-    print("From SNS: " + message)
-    return message
+    sns_message = event['Records'][0]['Sns']['Message']
+    # sns_message = json.loads(event['Records'][0]['Sns']['Message'])
+
+    process_sns_message(sns_message)
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('SNS message processed successfully!')
+    }
+
+def process_sns_message(sns_message):
+    print(f"Processing SNS message: {sns_message}")

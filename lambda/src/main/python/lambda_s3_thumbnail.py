@@ -12,7 +12,7 @@ def resize_image(image_path, resized_path):
         image.thumbnail(tuple(x / 2 for x in image.size))
         image.save(resized_path)
 
-def handler(event, context):
+def lambda_handler(event, context):
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
         key = record['s3']['object']['key']

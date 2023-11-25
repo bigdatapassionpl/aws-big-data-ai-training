@@ -57,4 +57,13 @@ aws lambda create-function \
     --memory-size 512 \
     --zip-file fileb://function.zip
 
+aws lambda create-function \
+    --function-name lambda_sns_writer \
+    --runtime python3.11 \
+    --role arn:aws:iam::317055048278:role/LabRole  \
+    --handler lambda_sns_writer.lambda_handler \
+    --timeout 15 \
+    --memory-size 512 \
+    --zip-file fileb://function.zip
+
 rm -rf function.zip
