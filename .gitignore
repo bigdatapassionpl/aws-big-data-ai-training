@@ -22,3 +22,6 @@ build
 # Eclipse
 .settings
 .project
+
+# MacOS
+.DS_Store
