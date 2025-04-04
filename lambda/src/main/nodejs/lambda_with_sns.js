@@ -6,7 +6,7 @@ exports.handler = function (event, context) {
 
     sns.publish({
         Message: 'Test Message to SNS from Lambda',
-        TopicArn: 'arn:aws:sns:us-east-1:317055048278:PolitechnikaSNSTopic'
+        TopicArn: 'arn:aws:sns:us-east-1:932771310344:PolitechnikaSNSTopic'
     }, function (err, data) {
         if (err) {
             console.log(err.stack);
