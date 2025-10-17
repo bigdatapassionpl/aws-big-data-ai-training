@@ -2,7 +2,7 @@ import json
 import boto3
 import random
 
-sns_topic_arn = 'arn:aws:sns:us-east-1:932771310344:PolitechnikaSNSTopic'
+sns_topic_arn = 'arn:aws:sns:us-east-1:448791961794:PolitechnikaSNSTopic'
 
 def lambda_handler(event, context):
 
