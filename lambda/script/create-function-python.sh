@@ -3,7 +3,7 @@
 cd ../src/main/python
 zip -r function.zip  *
 
-export AWS_ROLE='arn:aws:iam::932771310344:role/LabRole'
+export AWS_ROLE='arn:aws:iam::012235137533:role/LabRole'
 
 aws lambda create-function \
     --function-name lambda_context \
