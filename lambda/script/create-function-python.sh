@@ -12,6 +12,7 @@ aws lambda create-function \
     --handler lambda_context.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -21,6 +22,7 @@ aws lambda create-function \
     --handler lambda_dynamodb_writer.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -30,6 +32,7 @@ aws lambda create-function \
     --handler lambda_hello.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -39,6 +42,7 @@ aws lambda create-function \
     --handler lambda_kinesis_reader.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -48,6 +52,7 @@ aws lambda create-function \
     --handler lambda_kinesis_writer.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -57,6 +62,7 @@ aws lambda create-function \
     --handler lambda_s3_thumbnail.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -66,6 +72,7 @@ aws lambda create-function \
     --handler lambda_sns_reader.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 aws lambda create-function \
@@ -75,6 +82,7 @@ aws lambda create-function \
     --handler lambda_sns_writer.lambda_handler \
     --timeout 15 \
     --memory-size 512 \
+    --output text --query 'FunctionName' \
     --zip-file fileb://function.zip
 
 rm -rf function.zip

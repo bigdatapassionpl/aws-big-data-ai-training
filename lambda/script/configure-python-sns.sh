@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export AWS_SNS_TOPIC_ARN="arn:aws:sns:us-east-1:932771310344:PolitechnikaSNSTopic"
+export AWS_SNS_TOPIC_ARN="arn:aws:sns:us-east-1:012235137533:PolitechnikaSNSTopic"
 export AWS_LAMBDA_ARN="arn:aws:lambda:us-east-1:932771310344:function:lambda_sns_reader"
 
 # Add Lambda to SNS as subscription
