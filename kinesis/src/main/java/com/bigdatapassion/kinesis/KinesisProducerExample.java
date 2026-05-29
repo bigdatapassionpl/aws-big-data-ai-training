@@ -45,6 +45,13 @@ public class KinesisProducerExample {
         if (args.length > 1) {
             try {
                 batchSize = Integer.parseInt(args[1]);
+                if (batchSize > 500) {
+                    System.out.println("Rozmiar paczki przekracza limit Kinesis (500). Zmniejszono do 500.");
+                    batchSize = 500;
+                } else if (batchSize < 1) {
+                    System.out.println("Rozmiar paczki musi wynosić co najmniej 1. Ustawiono 1.");
+                    batchSize = 1;
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Niepoprawny format parametru rozmiaru paczki. Użyto wartości domyślnej: " + batchSize);
             }
