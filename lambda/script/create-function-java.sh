@@ -3,7 +3,7 @@
 cd ..
 mvn clean install
 
-export AWS_ROLE='arn:aws:iam::012235137533:role/LabRole'
+export AWS_ROLE='arn:aws:iam::595221284641:role/LabRole'
 
 aws lambda create-function \
     --function-name lambda-function-in-java-dynamodb \

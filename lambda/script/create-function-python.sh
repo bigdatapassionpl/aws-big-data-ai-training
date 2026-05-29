@@ -3,11 +3,11 @@
 cd ../src/main/python
 zip -r function.zip  *
 
-export AWS_ROLE='arn:aws:iam::012235137533:role/LabRole'
+export AWS_ROLE='arn:aws:iam::595221284641:role/LabRole'
 
 aws lambda create-function \
     --function-name lambda_context \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_context.lambda_handler \
     --timeout 15 \
@@ -17,7 +17,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_dynamodb_writer \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_dynamodb_writer.lambda_handler \
     --timeout 15 \
@@ -27,7 +27,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_hello \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_hello.lambda_handler \
     --timeout 15 \
@@ -37,7 +37,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_kinesis_reader \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_kinesis_reader.lambda_handler \
     --timeout 15 \
@@ -47,7 +47,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_kinesis_writer \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_kinesis_writer.lambda_handler \
     --timeout 15 \
@@ -57,7 +57,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_s3_thumbnail \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_s3_thumbnail.lambda_handler \
     --timeout 15 \
@@ -67,7 +67,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_sns_reader \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_sns_reader.lambda_handler \
     --timeout 15 \
@@ -77,7 +77,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda_sns_writer \
-    --runtime python3.11 \
+    --runtime python3.14 \
     --role $AWS_ROLE  \
     --handler lambda_sns_writer.lambda_handler \
     --timeout 15 \
