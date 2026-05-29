@@ -13,15 +13,15 @@ public class MessageFactory {
     public Message generateNextMessage(int number) {
 
         Message person = new Message();
-        person.setPartitionKey(String.format("partitionKey-%d", number));
-        person.setCurrentDate(LocalDateTime.now().format(formatter));
+        person.setPartitionkey(String.format("partitionkey-%d", number));
+        person.setCurrentdate(LocalDateTime.now().format(formatter));
 
         person.setName(faker.name().fullName());
-        person.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        person.setPhonenumber(faker.phoneNumber().phoneNumber());
 
         person.setCountry(faker.address().country());
         person.setCity(faker.address().city());
-        person.setStreetName(faker.address().streetName());
+        person.setStreetname(faker.address().streetName());
         person.setNumber(faker.address().buildingNumber());
 
         person.setAnimal(faker.animal().name());

@@ -35,7 +35,7 @@ public class KinesisProducerExample {
             PutRecordRequest kinesisRecord = PutRecordRequest.builder()
                     .streamName(kinesisConfiguration.getStreamName())
                     .data(SdkBytes.fromString(jsonMessage, StandardCharsets.UTF_8))
-                    .partitionKey(message.getPartitionKey())
+                    .partitionKey(message.getPartitionkey())
                     .build();
 
             PutRecordResponse putRecordResponse = kinesisClient.putRecord(kinesisRecord);

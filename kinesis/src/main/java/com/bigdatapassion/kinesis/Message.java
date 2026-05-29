@@ -2,30 +2,30 @@ package com.bigdatapassion.kinesis;
 
 public class Message {
 
-    private String partitionKey;
-    private String currentDate;
+    private String partitionkey;
+    private String currentdate;
     private String name;
-    private String phoneNumber;
-    private String streetName;
+    private String phonenumber;
+    private String streetname;
     private String number;
     private String city;
     private String country;
     private String animal;
 
-    public String getPartitionKey() {
-        return partitionKey;
+    public String getPartitionkey() {
+        return partitionkey;
     }
 
-    public void setPartitionKey(String partitionKey) {
-        this.partitionKey = partitionKey;
+    public void setPartitionkey(String partitionkey) {
+        this.partitionkey = partitionkey;
     }
 
-    public String getCurrentDate() {
-        return currentDate;
+    public String getCurrentdate() {
+        return currentdate;
     }
 
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
+    public void setCurrentdate(String currentdate) {
+        this.currentdate = currentdate;
     }
 
     public String getName() {
@@ -36,28 +36,28 @@ public class Message {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
     public String getAnimal() {
         return animal;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getStreetname() {
+        return streetname;
     }
 
     public void setAnimal(String animal) {
         this.animal = animal;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setStreetname(String streetname) {
+        this.streetname = streetname;
     }
 
     public String getNumber() {
