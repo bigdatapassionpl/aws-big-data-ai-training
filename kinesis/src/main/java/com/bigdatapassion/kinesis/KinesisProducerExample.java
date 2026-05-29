@@ -28,11 +28,19 @@ public class KinesisProducerExample {
                 .build();
 
         int messageCount = 1000;
+        long sleepTimeMs = 500;
         if (args.length > 0) {
             try {
                 messageCount = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
                 System.err.println("Niepoprawny format parametru liczby wiadomości. Użyto wartości domyślnej: " + messageCount);
+            }
+        }
+        if (args.length > 1) {
+            try {
+                sleepTimeMs = Long.parseLong(args[1]);
+            } catch (NumberFormatException e) {
+                System.err.println("Niepoprawny format parametru czasu oczekiwania. Użyto wartości domyślnej: " + sleepTimeMs);
             }
         }
 
@@ -51,7 +59,7 @@ public class KinesisProducerExample {
 
             System.out.println(MessageFormat.format("Wysłano wiadomość do shard {0} o treści: {1}", putRecordResponse.shardId(), jsonMessage));
 
-            Thread.sleep(500);
+            Thread.sleep(sleepTimeMs);
         }
     }
 
