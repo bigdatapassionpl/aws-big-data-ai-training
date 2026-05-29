@@ -27,7 +27,16 @@ public class KinesisProducerExample {
                 .region(kinesisConfiguration.getRegion())
                 .build();
 
-        for (int j = 0; j < 1000; j++) {
+        int messageCount = 1000;
+        if (args.length > 0) {
+            try {
+                messageCount = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Niepoprawny format parametru liczby wiadomości. Użyto wartości domyślnej: " + messageCount);
+            }
+        }
+
+        for (int j = 0; j < messageCount; j++) {
 
             Message message = personFactory.generateNextMessage(j);
             String jsonMessage = gson.toJson(message);
