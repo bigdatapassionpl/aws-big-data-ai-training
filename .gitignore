@@ -25,3 +25,6 @@ build
 
 # MacOS
 .DS_Store
+
+# AI
+.antigravitycli
