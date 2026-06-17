@@ -35,7 +35,7 @@
         <hbase.version>[1.4.8]</hbase.version>
 
         <!--Other-->
-        <jackson.version>2.10.0.pr1</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
 
         <!-- Java 11 -->
         <java.version>11</java.version>
