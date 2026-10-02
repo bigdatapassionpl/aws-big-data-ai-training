@@ -1,6 +1,9 @@
 package com.bigdatapassion.kinesis;
 
 import com.google.gson.Gson;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
@@ -10,13 +13,35 @@ import software.amazon.awssdk.services.kinesis.model.PutRecordsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 
-public class KinesisProducerExample {
+@Command(name = "kinesis-producer", sortOptions = false, description = "Sends generated JSON messages to a Kinesis stream.")
+public class KinesisProducerExample implements Callable<Integer> {
 
-    public static void main(String[] args) throws InterruptedException {
+    @Option(names = {"-n", "--messages"}, paramLabel = "<count>", defaultValue = "1000", description = "Number of messages (default: ${DEFAULT-VALUE})")
+    private int totalMessages;
+
+    @Option(names = {"-b", "--batch-size"}, paramLabel = "<size>", defaultValue = "1", description = "Batch size, 1-500 (default: ${DEFAULT-VALUE})")
+    private int batchSize;
+
+    @Option(names = {"-t", "--sleep-ms"}, paramLabel = "<ms>", defaultValue = "500", description = "Sleep time between batches in ms (default: ${DEFAULT-VALUE})")
+    private long sleepTimeMs;
+
+    @Option(names = {"-s", "--stream"}, paramLabel = "<name>", description = "Kinesis stream name (default: kinesis.properties)")
+    private String streamName;
+
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit")
+    private boolean help;
+
+    public static void main(String[] args) {
+        System.exit(new CommandLine(new KinesisProducerExample()).execute(args));
+    }
+
+    @Override
+    public Integer call() throws InterruptedException {
 
         Gson gson = new Gson();
         MessageFactory personFactory = new MessageFactory();
@@ -31,43 +56,12 @@ public class KinesisProducerExample {
                 .region(kinesisConfiguration.getRegion())
                 .build();
 
-        int totalMessages = 1000;
-        int batchSize = 1;
-        long sleepTimeMs = 500;
-        String streamName = kinesisConfiguration.getStreamName();
-
-        if (args.length > 0) {
-            try {
-                totalMessages = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid format of the message count parameter. Using default value: " + totalMessages);
-            }
+        batchSize = Math.max(1, Math.min(500, batchSize)); // Kinesis limit: 1-500 records
+        if (streamName == null || streamName.isBlank()) {
+            streamName = kinesisConfiguration.getStreamName();
         }
-        if (args.length > 1) {
-            try {
-                batchSize = Integer.parseInt(args[1]);
-                if (batchSize > 500) {
-                    System.out.println("Batch size exceeds the Kinesis limit (500). Reduced to 500.");
-                    batchSize = 500;
-                } else if (batchSize < 1) {
-                    System.out.println("Batch size must be at least 1. Set to 1.");
-                    batchSize = 1;
-                }
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid format of the batch size parameter. Using default value: " + batchSize);
-            }
-        }
-        if (args.length > 2) {
-            try {
-                sleepTimeMs = Long.parseLong(args[2]);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid format of the sleep time parameter. Using default value: " + sleepTimeMs);
-            }
-        }
-        if (args.length > 3 && !args[3].isBlank()) {
-            streamName = args[3];
-        }
-        System.out.println("Kinesis stream: " + streamName);
+        System.out.printf("Messages: %d, batch size: %d, sleep: %d ms, Kinesis stream: %s%n",
+                totalMessages, batchSize, sleepTimeMs, streamName);
 
         int sentMessages = 0;
         while (sentMessages < totalMessages) {
@@ -100,6 +94,7 @@ public class KinesisProducerExample {
                 Thread.sleep(sleepTimeMs);
             }
         }
+        return 0;
     }
 
 }

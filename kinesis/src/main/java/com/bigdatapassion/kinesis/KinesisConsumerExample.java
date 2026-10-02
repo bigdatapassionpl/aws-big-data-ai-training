@@ -1,21 +1,39 @@
 package com.bigdatapassion.kinesis;
 
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
-public class KinesisConsumerExample {
+@Command(name = "kinesis-consumer", description = "Reads all messages from a Kinesis stream and prints them.")
+public class KinesisConsumerExample implements Callable<Integer> {
 
-    public static void main(String[] args) throws Exception {
+    @Option(names = {"-s", "--stream"}, paramLabel = "<name>", description = "Kinesis stream name (default: kinesis.properties)")
+    private String streamName;
+
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit")
+    private boolean help;
+
+    public static void main(String[] args) {
+        System.exit(new CommandLine(new KinesisConsumerExample()).execute(args));
+    }
+
+    @Override
+    public Integer call() throws InterruptedException {
 
         KinesisConfiguration kinesisConfiguration = new KinesisConfiguration();
         kinesisConfiguration.load();
 
-        String streamName = args.length > 0 && !args[0].isBlank() ? args[0] : kinesisConfiguration.getStreamName();
+        if (streamName == null || streamName.isBlank()) {
+            streamName = kinesisConfiguration.getStreamName();
+        }
         System.out.println("Kinesis stream: " + streamName);
 
         KinesisClient kinesisClient = KinesisClient.builder()
