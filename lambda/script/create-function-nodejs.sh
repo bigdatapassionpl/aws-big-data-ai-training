@@ -7,7 +7,7 @@ export AWS_ROLE='arn:aws:iam::595221284641:role/LabRole'
 
 aws lambda create-function \
     --function-name lambda-function-in-nodejs-simple \
-    --runtime nodejs16.x \
+    --runtime nodejs24.x \
     --role $AWS_ROLE  \
     --handler lambda_simple.handler \
     --timeout 15 \
@@ -16,7 +16,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda-function-in-nodejs-s3 \
-    --runtime nodejs16.x \
+    --runtime nodejs24.x \
     --role $AWS_ROLE  \
     --handler lambda_with_s3.handler \
     --timeout 15 \
@@ -25,7 +25,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda-function-in-nodejs-sns-put \
-    --runtime nodejs16.x \
+    --runtime nodejs24.x \
     --role $AWS_ROLE  \
     --handler lambda_with_sns.handler \
     --timeout 15 \

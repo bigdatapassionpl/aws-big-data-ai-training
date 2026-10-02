@@ -3,17 +3,15 @@ package com.bigdatapassion;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRecord;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification.S3EventNotificationRecord;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,9 +61,8 @@ public class S3EventProcessorCreateThumbnail implements RequestHandler<S3Event, 
             }
 
             // Download the image from S3 into a stream
-            AmazonS3 s3Client = new AmazonS3Client();
-            S3Object s3Object = s3Client.getObject(new GetObjectRequest(srcBucket, srcKey));
-            InputStream objectData = s3Object.getObjectContent();
+            S3Client s3Client = S3Client.create();
+            InputStream objectData = s3Client.getObject(GetObjectRequest.builder().bucket(srcBucket).key(srcKey).build());
 
             // Read the source image
             BufferedImage srcImage = ImageIO.read(objectData);
@@ -90,20 +87,21 @@ public class S3EventProcessorCreateThumbnail implements RequestHandler<S3Event, 
             // Re-encode image to target format
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ImageIO.write(resizedImage, imageType, os);
-            InputStream is = new ByteArrayInputStream(os.toByteArray());
             // Set Content-Length and Content-Type
-            ObjectMetadata meta = new ObjectMetadata();
-            meta.setContentLength(os.size());
+            PutObjectRequest.Builder putRequest = PutObjectRequest.builder()
+                    .bucket(dstBucket)
+                    .key(dstKey)
+                    .contentLength((long) os.size());
             if (JPG_TYPE.equals(imageType)) {
-                meta.setContentType(JPG_MIME);
+                putRequest.contentType(JPG_MIME);
             }
             if (PNG_TYPE.equals(imageType)) {
-                meta.setContentType(PNG_MIME);
+                putRequest.contentType(PNG_MIME);
             }
 
             // Uploading to S3 destination bucket
             System.out.println("Writing to: " + dstBucket + "/" + dstKey);
-            s3Client.putObject(dstBucket, dstKey, is, meta);
+            s3Client.putObject(putRequest.build(), RequestBody.fromBytes(os.toByteArray()));
             System.out.println("Successfully resized " + srcBucket + "/" + srcKey + " and uploaded to " + dstBucket + "/" + dstKey);
 
             return "Ok";

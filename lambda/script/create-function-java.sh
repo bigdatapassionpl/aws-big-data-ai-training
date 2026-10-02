@@ -7,7 +7,7 @@ export AWS_ROLE='arn:aws:iam::595221284641:role/LabRole'
 
 aws lambda create-function \
     --function-name lambda-function-in-java-dynamodb \
-    --runtime java8 \
+    --runtime java25 \
     --role $AWS_ROLE  \
     --handler com.bigdatapassion.DynamoDBLambda \
     --timeout 15 \
@@ -16,7 +16,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda-function-in-java-hello \
-    --runtime java8 \
+    --runtime java25 \
     --role $AWS_ROLE  \
     --handler com.bigdatapassion.HelloLambda \
     --timeout 15 \
@@ -25,7 +25,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda-function-in-java-simple \
-    --runtime java8 \
+    --runtime java25 \
     --role $AWS_ROLE  \
     --handler com.bigdatapassion.SimpleLambda \
     --timeout 15 \
@@ -34,7 +34,7 @@ aws lambda create-function \
 
 aws lambda create-function \
     --function-name lambda-function-in-java-stream \
-    --runtime java8 \
+    --runtime java25 \
     --role $AWS_ROLE  \
     --handler com.bigdatapassion.StreamLambda \
     --timeout 15 \

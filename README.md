@@ -20,7 +20,7 @@ mvn install:install-file \
 ~~~
 
 ~~~bash
-java11 # Java version selection
+java17 # Java version selection
 mvn clean install -P uber # Building with dependencies
 aws s3 cp kinesis/target/kinesis-1.0-SNAPSHOT-jar-with-dependencies.jar s3://radek-datasets-public/ --profile radek
 ~~~

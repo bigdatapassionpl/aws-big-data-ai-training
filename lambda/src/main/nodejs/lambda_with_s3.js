@@ -1,8 +1,8 @@
-const AWS = require('aws-sdk');
+const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
 
 exports.handler = async (event, context) => {
     // Set up the S3 client
-    const s3 = new AWS.S3();
+    const s3 = new S3Client();
 
     // Specify the bucket and file key
     const bucketName = 'radek-politechnika-2023-11-25';
@@ -15,10 +15,10 @@ exports.handler = async (event, context) => {
             Key: fileKey
         };
 
-        const s3Object = await s3.getObject(params).promise();
+        const s3Object = await s3.send(new GetObjectCommand(params));
 
         // Process the file content (you can customize this part based on your needs)
-        const fileContent = s3Object.Body.toString('utf-8');
+        const fileContent = await s3Object.Body.transformToString('utf-8');
 
         // Log or process the file content as needed
         console.log('File Content:', fileContent);

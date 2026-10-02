@@ -1,13 +1,13 @@
 package com.bigdatapassion;
 
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.bigdatapassion.dto.RequestClass;
 import com.bigdatapassion.dto.ResponseClass;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -24,13 +24,13 @@ public class DynamoDBLambda implements RequestHandler<RequestClass, ResponseClas
         context.getLogger().log(greetingString);
 
         Map<String, AttributeValue> item = new HashMap<>();
-        item.put("Timestamp", new AttributeValue().withN("" + Instant.now().getEpochSecond()));
-        item.put("FirstName", new AttributeValue().withS(request.getFirstName()));
-        item.put("LastName", new AttributeValue().withS(request.getLastName()));
+        item.put("Timestamp", AttributeValue.builder().n("" + Instant.now().getEpochSecond()).build());
+        item.put("FirstName", AttributeValue.builder().s(request.getFirstName()).build());
+        item.put("LastName", AttributeValue.builder().s(request.getLastName()).build());
 
-        AmazonDynamoDB dynamoClient = AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
-        dynamoClient.putItem(TABLE_NAME, item);
-        dynamoClient.shutdown();
+        DynamoDbClient dynamoClient = DynamoDbClient.builder().region(Region.US_EAST_1).build();
+        dynamoClient.putItem(PutItemRequest.builder().tableName(TABLE_NAME).item(item).build());
+        dynamoClient.close();
 
         return new ResponseClass(greetingString);
     }

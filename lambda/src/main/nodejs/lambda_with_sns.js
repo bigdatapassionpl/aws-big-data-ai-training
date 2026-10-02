@@ -1,18 +1,16 @@
-var aws_sdk = require('aws-sdk');
-aws_sdk.config.region = 'us-east-1';
+const { SNSClient, PublishCommand } = require('@aws-sdk/client-sns');
 
-exports.handler = function (event, context) {
-    var sns = new aws_sdk.SNS();
+const sns = new SNSClient({ region: 'us-east-1' });
 
-    sns.publish({
-        Message: 'Test Message to SNS from Lambda',
-        TopicArn: 'arn:aws:sns:us-east-1:932771310344:PolitechnikaSNSTopic'
-    }, function (err, data) {
-        if (err) {
-            console.log(err.stack);
-            return;
-        }
+exports.handler = async (event, context) => {
+    try {
+        const data = await sns.send(new PublishCommand({
+            Message: 'Test Message to SNS from Lambda',
+            TopicArn: 'arn:aws:sns:us-east-1:932771310344:PolitechnikaSNSTopic'
+        }));
         console.log('Message sent successfully');
         console.log(data);
-    });
+    } catch (err) {
+        console.log(err.stack);
+    }
 };

@@ -1,6 +1,5 @@
 package com.bigdatapassion.kinesis;
 
-import org.apache.commons.lang3.ObjectUtils;
 import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.regions.Region;
 
@@ -33,11 +32,11 @@ public class KinesisConfiguration {
         String secretKey = prop.getProperty("aws_secret_access_key");
         String sessionToken = prop.getProperty("aws_session_token");
 
-        if (ObjectUtils.allNotNull(accessKey, secretKey, sessionToken)) {
+        if (accessKey != null && secretKey != null && sessionToken != null) {
             AwsCredentials awsCredentials = AwsSessionCredentials.create(accessKey, secretKey, sessionToken);
             return StaticCredentialsProvider.create(awsCredentials);
         } else {
-            return DefaultCredentialsProvider.create();
+            return DefaultCredentialsProvider.builder().build();
         }
     }
 

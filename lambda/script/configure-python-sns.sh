@@ -21,4 +21,4 @@ aws lambda add-permission \
 aws sns publish \
     --topic-arn $AWS_SNS_TOPIC_ARN \
     --subject "HelloFromSNSTopicAndLambda" \
-    --message "Testowa wiadomość z konsoli do AWS SNS"
+    --message "Test message from the console to AWS SNS"

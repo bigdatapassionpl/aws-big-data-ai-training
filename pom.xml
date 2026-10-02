@@ -26,24 +26,26 @@
     <properties>
 
         <!--AWS-->
-        <sagemaker-spark.version>spark_2.2.0-1.2.1</sagemaker-spark.version>
+        <aws-sdk.version>2.55.10</aws-sdk.version>
+        <sagemaker-spark.version>spark_2.2.0-1.4.0</sagemaker-spark.version>
+        <aws-glue-etl.version>6.0.0</aws-glue-etl.version>
 
-        <!-- AWS EMR 5.20.0-->
-        <hadoop.version>[2.8.5]</hadoop.version>
-        <spark.version>[2.4.0]</spark.version>
-        <hive.version>[2.3.4]</hive.version>
-        <hbase.version>[1.4.8]</hbase.version>
+        <!-- AWS EMR 7.14.0-->
+        <hadoop.version>[3.4.2]</hadoop.version>
+        <spark.version>[3.5.8]</spark.version>
+        <hive.version>[3.1.3]</hive.version>
+        <hbase.version>[2.6.4]</hbase.version>
 
         <!--Other-->
         <jackson.version>2.10.0.pr1</jackson.version>
 
-        <!-- Java 11 -->
-        <java.version>11</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- Java version -->
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
         <!--Scala-->
-        <scala.version>[2.12.7]</scala.version>
+        <scala.version>[2.12.18]</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
 
         <!-- UTF-8 -->
@@ -52,7 +54,7 @@
 
         <!--Maven-->
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
-        <scala-maven-plugin.version>3.3.1</scala-maven-plugin.version>
+        <scala-maven-plugin.version>4.10.0</scala-maven-plugin.version>
         <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
 
     </properties>
@@ -60,37 +62,32 @@
     <dependencyManagement>
         <dependencies>
 
+            <!--AWS SDK for Java 2.x (DynamoDB, S3, Kinesis, Glue, ...)-->
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws-sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!--AWS lambda-->
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-lambda-java-core</artifactId>
-                <version>1.2.0</version>
+                <version>1.4.0</version>
             </dependency>
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-lambda-java-events</artifactId>
-                <version>2.2.6</version>
-            </dependency>
-
-            <!--AWS DynamoDB-->
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-dynamodb</artifactId>
-                <version>1.11.517</version>
-            </dependency>
-
-            <!--AWS S3-->
-            <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-s3</artifactId>
-                <version>1.11.517</version>
+                <version>3.16.1</version>
             </dependency>
 
             <!-- AWS Glue -->
             <dependency>
                 <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-glue</artifactId>
-                <version>1.11.517</version>
+                <artifactId>AWSGlueETL</artifactId>
+                <version>${aws-glue-etl.version}</version>
             </dependency>
 <!--            <dependency>-->
 <!--                <groupId>com.amazonaws</groupId>-->
@@ -175,11 +172,11 @@
                 <version>2.8.6</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+            <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
             <dependency>
-                <groupId>com.github.javafaker</groupId>
-                <artifactId>javafaker</artifactId>
-                <version>1.0.2</version>
+                <groupId>net.datafaker</groupId>
+                <artifactId>datafaker</artifactId>
+                <version>2.7.0</version>
             </dependency>
 
         </dependencies>

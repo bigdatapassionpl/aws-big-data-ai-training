@@ -15,12 +15,15 @@ public class KinesisConsumerExample {
         KinesisConfiguration kinesisConfiguration = new KinesisConfiguration();
         kinesisConfiguration.load();
 
+        String streamName = args.length > 0 && !args[0].isBlank() ? args[0] : kinesisConfiguration.getStreamName();
+        System.out.println("Kinesis stream: " + streamName);
+
         KinesisClient kinesisClient = KinesisClient.builder()
                 .region(kinesisConfiguration.getRegion())
                 .build();
 
         DescribeStreamRequest describeRequest = DescribeStreamRequest.builder()
-                .streamName(kinesisConfiguration.getStreamName())
+                .streamName(streamName)
                 .build();
 
         DescribeStreamResponse describeResponse = kinesisClient.describeStream(describeRequest);
@@ -31,7 +34,7 @@ public class KinesisConsumerExample {
         Map<String, String> shardsIterators = shards.stream()
                 .collect(Collectors.toMap(
                         Shard::shardId,
-                        shard -> getFirstIteratorForShard(kinesisConfiguration, kinesisClient, shard)
+                        shard -> getFirstIteratorForShard(streamName, kinesisClient, shard)
                 ));
 
 
@@ -49,10 +52,10 @@ public class KinesisConsumerExample {
 
     }
 
-    private static String getFirstIteratorForShard(KinesisConfiguration kinesisConfiguration, KinesisClient kinesisClient, Shard shard) {
+    private static String getFirstIteratorForShard(String streamName, KinesisClient kinesisClient, Shard shard) {
 
         GetShardIteratorRequest iteratorRequest = GetShardIteratorRequest.builder()
-                .streamName(kinesisConfiguration.getStreamName())
+                .streamName(streamName)
                 .shardId(shard.shardId())
                 .shardIteratorType(ShardIteratorType.TRIM_HORIZON)
                 .build();

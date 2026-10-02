@@ -1,6 +1,6 @@
 package com.bigdatapassion.kinesis;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
