@@ -24,15 +24,3 @@ java17
 mvn clean install -P uber
 aws s3 cp kinesis/target/kinesis-1.0-SNAPSHOT-jar-with-dependencies.jar s3://radek-datasets-public/ --profile radek
 ~~~
-
-~~~shell
-aws kinesis create-stream --stream-name kinesis-data-stream-example --shard-count 3
-aws kinesis list-streams
-aws kinesis delete-stream --stream-name kinesis-data-stream-example
-~~~
-
-~~~bash
-aws s3 cp s3://radek-datasets-public/kinesis-1.0-SNAPSHOT-jar-with-dependencies.jar .
-
-java -cp kinesis-1.0-SNAPSHOT-jar-with-dependencies.jar com.bigdatapassion.kinesis.KinesisProducerExample -n 1000 -b 1 -t 500 -s kinesis-data-stream-example
-~~~

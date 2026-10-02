@@ -3,7 +3,8 @@
 cd ../src/main/nodejs
 zip -r function.zip  *
 
-export AWS_ROLE='arn:aws:iam::595221284641:role/LabRole'
+export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+export AWS_ROLE="arn:aws:iam::${ACCOUNT_ID}:role/LabRole"
 
 aws lambda create-function \
     --function-name lambda-function-in-nodejs-simple \

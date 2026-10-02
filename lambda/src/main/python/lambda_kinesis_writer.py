@@ -40,10 +40,13 @@ def lambda_handler(event, context):
         PartitionKey=data_to_put['partitionkey']
     )
 
-    print(f"SequenceNumber: {response['SequenceNumber']}")
+    message = (f"Message for {data_to_put['name']} written to Kinesis successfully! "
+               f"ShardId: {response['ShardId']}, SequenceNumber: {response['SequenceNumber']}")
+
+    print(message)
 
     return {
         'statusCode': 200,
-        'body': json.dumps(f"Message for {data_to_put['name']} written to Kinesis successfully!")
+        'body': json.dumps(message)
     }
 
